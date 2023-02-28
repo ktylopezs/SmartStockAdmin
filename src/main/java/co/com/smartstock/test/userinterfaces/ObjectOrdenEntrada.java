@@ -46,6 +46,6 @@ public class ObjectOrdenEntrada extends PageObject {
     public static final Target ListaCambiarEtapa = Target.the("Lista de Cambiar la etapa de la orden de entrada")
             .located(By.xpath("(.//*[normalize-space(text()) and normalize-space(.)='Doc. relacionado'])[2]/following::li[1]/.."));
     public static final Target FinalizarOrden = Target.the("Finalizar la orden de entrada").located(By.xpath("//span[contains(text(),'Continuar')]"));
-    public static final Target CerrarVentana = Target.the("Cerrar ventana despues de finalizar la orden")
-            .locatedBy("button.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-colorInherit > span.MuiIconButton-label > svg.MuiSvgIcon-root");
+    public static final Target CerrarVentana = Target.the("Cerrar ventana despues de finalizar la orden").located(By.xpath("//header//button[1]/span[1]/*[1]/*/../../.."));
+    public static final Target OrdenObtenida = Target.the("Numero de Orden Obtenida").located(By.xpath("//td[5]"));
 }

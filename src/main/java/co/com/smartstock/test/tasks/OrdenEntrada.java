@@ -15,6 +15,9 @@ import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;
 import net.serenitybdd.screenplay.questions.WebElementQuestion;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 
+import java.util.Collections;
+import java.util.List;
+
 import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
 
 public class OrdenEntrada implements Task {
@@ -78,8 +81,27 @@ public class OrdenEntrada implements Task {
                 Click.on(ObjectOrdenEntrada.CambiarEtapa),
                 Click.on(ObjectOrdenEntrada.ListaCambiarEtapa),
                 Click.on(ObjectOrdenEntrada.FinalizarOrden)
-                /*Click.on(ObjectOrdenEntrada.CerrarVentana)*/
         );
+
+        // El sitio se demora mucho en mostrar el elemento motivo por el cual se crea este tiempo de espera.
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        actor.attemptsTo(Click.on(ObjectOrdenEntrada.CerrarVentana));
+
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        // Con esta lista voy a obtener el numero de Orden de Entrada Obtenido
+        List<String> Orden = Collections.singletonList(ObjectOrdenEntrada.OrdenObtenida.resolveFor(actor).getText());
+        System.out.println("Numero de Ordenes Obtenida : " + Orden.size());
+        System.out.println("Nombre de Orden Obtenida : " + Orden.get(0));
+
 
     }
 }
