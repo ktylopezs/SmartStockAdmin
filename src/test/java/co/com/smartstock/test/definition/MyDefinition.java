@@ -1,6 +1,7 @@
 package co.com.smartstock.test.definition;
 
 import co.com.smartstock.test.tasks.AbrirPagina;
+import co.com.smartstock.test.tasks.EntradaInventario;
 import co.com.smartstock.test.tasks.OrdenEntrada;
 import co.com.smartstock.test.userinterfaces.LoginPagina;
 import cucumber.api.DataTable;
@@ -43,7 +44,9 @@ public class MyDefinition {
 
     @Cuando("^realiza la orden de entrada$")
     public void realizaLaOrdenDeEntrada() {
+
         OnStage.theActorCalled("jhon").wasAbleTo(OrdenEntrada.Entrada());
+        OnStage.theActorCalled("jhon").wasAbleTo(EntradaInventario.Productos());
     }
 
     @Entonces("^verifica que se creo correctamente$")

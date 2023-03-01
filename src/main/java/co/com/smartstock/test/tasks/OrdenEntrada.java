@@ -3,16 +3,16 @@ package co.com.smartstock.test.tasks;
 import co.com.smartstock.test.interactions.Agregardetalles;
 import co.com.smartstock.test.interactions.SeleccionBodega;
 import co.com.smartstock.test.userinterfaces.LoginPagina;
+import co.com.smartstock.test.userinterfaces.ObjectEntradaInventario;
 import co.com.smartstock.test.userinterfaces.ObjectOrdenEntrada;
 import co.com.smartstock.test.utils.CargarArchivos;
-import net.serenitybdd.screenplay.Actor;
-import net.serenitybdd.screenplay.Task;
-import net.serenitybdd.screenplay.Tasks;
+import net.serenitybdd.screenplay.*;
 import net.serenitybdd.screenplay.actions.Click;
 import net.serenitybdd.screenplay.actions.Enter;
 import net.serenitybdd.screenplay.actions.Scroll;
 import net.serenitybdd.screenplay.matchers.WebElementStateMatchers;
 import net.serenitybdd.screenplay.questions.WebElementQuestion;
+import net.serenitybdd.screenplay.waits.Wait;
 import net.serenitybdd.screenplay.waits.WaitUntil;
 
 import java.util.Collections;
@@ -34,12 +34,19 @@ public class OrdenEntrada implements Task {
                 Scroll.to(LoginPagina.BTN_RENTRADA),
                 Click.on(LoginPagina.BTN_RENTRADA));
 
-        // Permite realizar un tiempo de espera por el elemento
-        actor.attemptsTo(
-                WaitUntil.the(ObjectOrdenEntrada.AGREGARORDENENTRADA, WebElementStateMatchers.isVisible())
-                        .forNoMoreThan(10)
-                        .seconds()
-        );
+
+        // Se crea un Questions para esperar por el elemento y luego realizar la accion.
+        actor.attemptsTo(Wait.until(
+                WebElementQuestion.the(ObjectOrdenEntrada.AGREGARORDENENTRADA), WebElementStateMatchers.isEnabled()
+        ).forNoLongerThan(30).seconds());
+
+
+//        // Permite realizar un tiempo de espera por el elemento
+//        actor.attemptsTo(
+//                WaitUntil.the(ObjectOrdenEntrada.AGREGARORDENENTRADA, WebElementStateMatchers.isVisible())
+//                        .forNoMoreThan(10)
+//                        .seconds()
+//        );
 
         // Esta funcion me permite verificar si el elemento es visible
         actor.should(
@@ -98,10 +105,46 @@ public class OrdenEntrada implements Task {
         }
 
         // Con esta lista voy a obtener el numero de Orden de Entrada Obtenido
+
         List<String> Orden = Collections.singletonList(ObjectOrdenEntrada.OrdenObtenida.resolveFor(actor).getText());
+        String numordenone = Orden.get(0);
         System.out.println("Numero de Ordenes Obtenida : " + Orden.size());
         System.out.println("Nombre de Orden Obtenida : " + Orden.get(0));
 
+        actor.attemptsTo(
+                Click.on(ObjectEntradaInventario.Procesos),
+                Click.on(ObjectEntradaInventario.EntradaInv)
+        );
+
+        // Se crea un Questions para esperar por el elemento y luego realizar la accion.
+        actor.attemptsTo(Wait.until(
+                WebElementQuestion.the(ObjectEntradaInventario.AgregarInv), WebElementStateMatchers.isEnabled()
+        ).forNoLongerThan(30).seconds());
+
+        // assert with waiting
+        actor.should(EventualConsequence.eventually(GivenWhenThen.seeThat(
+                WebElementQuestion.the(ObjectEntradaInventario.AgregarInv),
+                WebElementStateMatchers.isEnabled())
+        ).waitingForNoLongerThan(30).seconds());
+
+        actor.attemptsTo(Click.on(ObjectEntradaInventario.AgregarInv));
+
+        // Se crea un Questions para esperar por el elemento y luego realizar la accion.
+        actor.attemptsTo(Wait.until(
+                WebElementQuestion.the(ObjectEntradaInventario.BuscarInv), WebElementStateMatchers.isEnabled()
+        ).forNoLongerThan(30).seconds());
+
+        // assert with waiting
+        actor.should(EventualConsequence.eventually(GivenWhenThen.seeThat(
+                WebElementQuestion.the(ObjectEntradaInventario.BuscarInv),
+                WebElementStateMatchers.isEnabled())
+        ).waitingForNoLongerThan(30).seconds());
+
+
+        actor.attemptsTo(Click.on(ObjectEntradaInventario.BuscarInv),
+                Enter.theValue(numordenone).into(ObjectEntradaInventario.BuscarInv));
+
 
     }
+
 }

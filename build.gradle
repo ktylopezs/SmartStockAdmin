@@ -38,3 +38,9 @@ dependencies {
 
 }
 gradle.startParameter.continueOnFailure = true
+
+// Este fragmento me permite realizar la ejecución del gradle con UT8
+compileJava.options.encoding = 'UTF-8'
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
