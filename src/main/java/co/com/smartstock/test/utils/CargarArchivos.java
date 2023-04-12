@@ -15,10 +15,30 @@ public class CargarArchivos {
         properties.load(new FileReader("Login.properties"));
     }
 
-    public static void OrdenEntrada() throws IOException {
+    public static void Administracion() throws IOException {
         properties = new Properties();
-        properties.load(new BufferedReader(new InputStreamReader(Files.newInputStream(Paths.get("OrdenEntrada.properties")), StandardCharsets.UTF_8)));
+        properties.load(new BufferedReader(new InputStreamReader(Files.newInputStream(Paths.get("Administracion.properties")), StandardCharsets.UTF_8)));
     }
 
+    public static void Parametros() throws IOException {
+        properties = new Properties();
+        properties.load(new BufferedReader(new InputStreamReader(Files.newInputStream(Paths.get("Parametros.properties")), StandardCharsets.UTF_8)));
+    }
+
+    public static void Bodegas() throws IOException {
+        properties = new Properties();
+        properties.load(new BufferedReader(new InputStreamReader(Files.newInputStream(Paths.get("Bodegas.properties")), StandardCharsets.UTF_8)));
+    }
+
+    public static void Productos() throws IOException {
+        properties = new Properties();
+        properties.load(new BufferedReader(new InputStreamReader(Files.newInputStream(Paths.get("Productos.properties")), StandardCharsets.UTF_8)));
+    }
+
+    public static void NvosRegistros() throws IOException {
+        properties = new Properties();
+        properties.load(new BufferedReader(new InputStreamReader(Files.newInputStream(Paths.get("NvosRegistros.properties")), StandardCharsets.UTF_8)));
+    }
 
 }
+

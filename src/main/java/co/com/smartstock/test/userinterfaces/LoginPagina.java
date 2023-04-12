@@ -11,6 +11,5 @@ public class LoginPagina extends PageObject {
     public static final Target TXT_PASSWORD = Target.the("Ingresar Password").located(By.xpath("//*[@name=\"Contrasenia\"]"));
     public static final Target BTN_LOGIN = Target.the("Click Login").located(By.xpath("//*[@class=\"MuiButton-label\"]/.."));
     public static final Target TituloPrincipal =  Target.the("Titulo del sitio principal").located(By.xpath("//*[@id=\"root\"]/div[2]/span/div[2]/div/div"));
-    public static final Target BTN_ORDENES = Target.the("Boton de ordenes").located(By.xpath("//*[@id=\"root\"]/div[1]/div[1]/div/ul/div[13]"));
-    public static final Target BTN_RENTRADA = Target.the("Boton orden de entrada").located(By.xpath("//h6[contains(text(),'Orden de Entrada')]"));
+
 }

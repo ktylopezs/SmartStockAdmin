@@ -1,23 +1,18 @@
 package co.com.smartstock.test.definition;
 
-import co.com.smartstock.test.tasks.AbrirPagina;
-import co.com.smartstock.test.tasks.EntradaInventario;
-import co.com.smartstock.test.tasks.OrdenEntrada;
-import co.com.smartstock.test.userinterfaces.LoginPagina;
-import cucumber.api.DataTable;
+import co.com.smartstock.test.interactions.CerrarSesion;
+import co.com.smartstock.test.tasks.*;
 import cucumber.api.java.Before;
 import cucumber.api.java.ast.Cuando;
 import cucumber.api.java.es.Dado;
 import cucumber.api.java.es.Entonces;
 import cucumber.api.java.es.Y;
-import net.serenitybdd.screenplay.actions.Click;
-import net.serenitybdd.screenplay.actions.Enter;
+import net.serenitybdd.screenplay.GivenWhenThen;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.serenitybdd.screenplay.actors.OnlineCast;
+import org.hamcrest.Matchers;
 
-import java.util.List;
-
-import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
+import java.awt.*;
 
 public class MyDefinition {
 
@@ -28,31 +23,27 @@ public class MyDefinition {
         OnStage.setTheStage(new OnlineCast());
     }
 
-    @Dado("^que jhon ingresa a la pagina smartstock$")
-    public void queJhonIngresaALaPaginaSmartstock() {
-
-        OnStage.theActorCalled("Jhon").wasAbleTo(AbrirPagina.urlApp());
+    @Dado("^que el usuario ingresa a la pagina SmartStock$")
+    public void queelusuarioingresaalapaginaSmartStock() {
+        OnStage.theActorCalled("usuario").wasAbleTo(AbrirPagina.urlApp());
     }
 
-//    @Cuando("^digita sus credenciales$")
-//    public void digitaSusCredenciales() throws InterruptedException {
-////        List<List<String>> data = Login.raw();
-////        theActorInTheSpotlight().attemptsTo(Enter.theValue(data.get(1).get(1)).into(LoginPagina.TXT_USUARIO),
-////                Enter.theValue(data.get(2).get(1)).into(LoginPagina.TXT_PASSWORD), Click.on(LoginPagina.BTN_LOGIN));
-////        Thread.sleep(2000);
-//    }
-
-    @Cuando("^realiza la orden de entrada$")
-    public void realizaLaOrdenDeEntrada() {
-
-        OnStage.theActorCalled("jhon").wasAbleTo(OrdenEntrada.Entrada());
-        OnStage.theActorCalled("jhon").wasAbleTo(EntradaInventario.Productos());
+    @Cuando("^ingrese a todas las opciones$")
+    public void ingreseatodaslasopciones() {
+       OnStage.theActorCalled("usuario").wasAbleTo(MenuAdministracion.Admin());
+       OnStage.theActorCalled("usuario").wasAbleTo(MenuParametros.Parametros());
+       OnStage.theActorCalled("usuario").wasAbleTo(MenuBodegas.Bodegas());
+       OnStage.theActorCalled("usuario").wasAbleTo(MenuProductos.Productos());
     }
 
-    @Entonces("^verifica que se creo correctamente$")
-    public void verificaQueSeCreoCorrectamente() {
+    @Entonces("^se crea usuario documento bodega y producto$")
+    public void secreausuariodocumentobodegayproducto() {
+        OnStage.theActorCalled("usuario").wasAbleTo(NuevosRegistros.NvoRegistro());
+        }
 
+    @Y("^se cierra la pagina de SmartStock$")
+    public void secierralapaginadeSmartStock() {
+        OnStage.theActorCalled("Usuario").wasAbleTo(CerrarSesion.Close());
     }
-
 
 }

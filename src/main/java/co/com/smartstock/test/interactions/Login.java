@@ -1,7 +1,6 @@
 package co.com.smartstock.test.interactions;
 
 import co.com.smartstock.test.userinterfaces.LoginPagina;
-import co.com.smartstock.test.userinterfaces.ObjectOrdenEntrada;
 import co.com.smartstock.test.utils.CargarArchivos;
 import net.serenitybdd.core.steps.Instrumented;
 import net.serenitybdd.screenplay.Actor;
